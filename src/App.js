@@ -1,24 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="app">
+          <header className="header">
+              <span>ISSUES</span>
+          </header>
+          <main className="contents">
+              <nav className="gnb">
+                  <div className="tab-buttons">
+                      <button>Labels</button>
+                      <button>Milestones</button>
+                  </div>
+                  <button className="new-btn">New Label</button>
+              </nav>
+
+              <section className="row-wrap">
+                  <div className="row-count">
+                      <span>8 labels</span>
+                  </div>
+                  <div className="row-list">
+                      <div className="row-item">
+                          <div className="subject">
+                              <span>bug</span>
+                          </div>
+                          <div className="desc">
+                              <span>description</span>
+                          </div>
+                          <div className="buttons">
+                              <button>Edit</button>
+                              <button>Delete</button>
+                          </div>
+                      </div>
+                      <div className="row-item">
+                          <div className="subject">
+                              <span>bug</span>
+                          </div>
+                          <div className="desc">
+                              <span>description</span>
+                          </div>
+                          <div className="buttons">
+                              <button>Edit</button>
+                              <button>Delete</button>
+                          </div>
+                      </div>
+                      <div className="row-item">
+                          <div className="subject">
+                              <span>bug</span>
+                          </div>
+                          <div className="desc">
+                              <span>description</span>
+                          </div>
+                          <div className="buttons">
+                              <button>Edit</button>
+                              <button>Delete</button>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </main>
+      </div>
   );
 }
 
