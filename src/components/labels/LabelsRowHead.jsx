@@ -1,7 +1,7 @@
-export default function LabelsRowHead() {
+export default function LabelsRowHead({labelsCount}) {
     return (
         <div className="row-count">
-            <span>8 labels</span>
+            <span>{labelsCount} labels</span>
         </div>
     );
 }
