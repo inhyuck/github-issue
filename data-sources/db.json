@@ -1,0 +1,16 @@
+{
+  "labels": [
+    {
+      "id": 1,
+      "subject": "bug",
+      "description": "Someting isn't working",
+      "backgroundColor": "#de3226"
+    },
+    {
+      "id": 2,
+      "subject": "feature",
+      "description": "New feature or request",
+      "backgroundColor": "#40c2ed"
+    }
+  ]
+}
