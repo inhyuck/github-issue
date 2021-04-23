@@ -1,0 +1,72 @@
+:root {
+    font-size: 16px;
+}
+
+button {
+    padding: 0.5rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    background-color: #24292e;
+}
+
+.header span {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.contents {
+    padding: 1rem 3rem;
+}
+
+.contents .tab-buttons {
+    display: inline-block;
+}
+
+.contents .row-wrap {
+    margin: 1rem 0rem;
+    border-radius: 0.5rem;
+    border: 1px solid #dad3d3;
+}
+
+.contents .row-wrap .row-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 1.5rem 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-color: rgb(246, 248, 250);
+}
+
+.contents .row-wrap .row-count span {
+    font-weight: bold;
+}
+
+.contents .row-wrap .row-item {
+    padding: 1.5rem 1rem;
+    border-top: 1px solid #dad3d3;
+}
+
+.contents .row-wrap .row-item div {
+    display: inline-block;
+    margin-right: 4rem;
+}
+
+.contents .row-wrap .row-item .subject {
+    padding: 0.3rem 0.9rem;
+    border-radius: 1rem;
+}
+
+.contents .row-wrap .row-item .desc {
+    color: #999393;
+}
+
+
+
