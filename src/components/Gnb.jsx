@@ -5,9 +5,8 @@ export default function Gnb({menu: selectedMenu, onChangeMenu}) {
     const selectedButtonStyle = {
         backgroundColor: 'rgb(3, 102, 214)',
     };
-    const menuButtons = Object.values(MENU)
-                              .map(menu => <button key={menu} style={selectedMenu === menu ? selectedButtonStyle : {}}
-                                                   onClick={() => onChangeMenu(menu)}>{toPascalCase(menu)}</button>);
+    const menuButtons = Object.values(MENU).map(menu => <button key={menu} style={selectedMenu === menu ? selectedButtonStyle : {}}
+                                                                onClick={() => onChangeMenu(menu)}>{toPascalCase(menu)}</button>);
 
     return (
         <nav className="gnb">
