@@ -7,8 +7,10 @@ const GET = (url) => {
         });
 };
 
-export default {
+const APIs = {
     getLabels() {
         return GET('/labels');
     },
-};
+}
+
+export default APIs;
