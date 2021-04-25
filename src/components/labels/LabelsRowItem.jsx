@@ -1,8 +1,8 @@
-export default function LabelsRowItem({label, onEditingLabel, deleteLabel}) {
+export default function LabelsRowItem({label, onEditLabel, deleteLabel}) {
     const {id, subject, description, backgroundColor} = label;
 
     const onClickEditLabel = () => {
-        onEditingLabel(id);
+        onEditLabel(id);
     };
     const onClickDeleteLabel = () => {
         window.confirm('정말 이 레이블을 삭제하시겠습니까?') && deleteLabel({id});
