@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import LabelEditWrapForm from "./LabelEditWrapForm.jsx";
 import {randomHexColor} from "../utils/colorUtils";
 
-export default function LabelEditWrap({label = {}, onEditLabel, cancelEditingLabel}) {
+export default function LabelEditWrap({label = {}, submitButtonText, saveLabel, cancelLabel}) {
     const {
         id,
         subject: prevSubject = '',
@@ -11,7 +11,6 @@ export default function LabelEditWrap({label = {}, onEditLabel, cancelEditingLab
     } = label;
 
     const [subject, setSubject] = useState(prevSubject);
-    const [description, setDescription] = useState(prevDescription);
     const [backgroundColor, setBackgroundColor] = useState(prevBackgroundColor);
 
     return (
@@ -23,10 +22,11 @@ export default function LabelEditWrap({label = {}, onEditLabel, cancelEditingLab
 
             <LabelEditWrapForm id={id}
                                subject={subject} setSubject={setSubject}
-                               description={description}
+                               description={prevDescription}
                                backgroundColor={backgroundColor} setBackgroundColor={setBackgroundColor}
-                               onEditLabel={onEditLabel}
-                               cancelEditingLabel={cancelEditingLabel}
+                               saveLabel={saveLabel}
+                               cancelLabel={cancelLabel}
+                               submitButtonText={submitButtonText}
             />
         </div>
     );

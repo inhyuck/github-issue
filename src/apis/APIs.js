@@ -39,6 +39,14 @@ const APIs = {
             backgroundColor,
         });
     },
+
+    createLabel({subject, description, backgroundColor}) {
+        return POST(`/labels`, {
+            subject,
+            description,
+            backgroundColor,
+        });
+    },
 }
 
 export default APIs;

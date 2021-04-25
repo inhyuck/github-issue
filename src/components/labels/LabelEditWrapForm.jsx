@@ -8,8 +8,9 @@ export default function LabelEditWrapForm({
                                               description,
                                               backgroundColor,
                                               setBackgroundColor,
-                                              onEditLabel,
-                                              cancelEditingLabel,
+                                              saveLabel,
+                                              cancelLabel,
+                                              submitButtonText,
                                           }) {
 
     const labelEditFormRef = useRef(null);
@@ -29,16 +30,13 @@ export default function LabelEditWrapForm({
     const onSubmitEditedLabel = (event) => {
         event.preventDefault();
         const {subject, description, backgroundColor} = Object.fromEntries(new FormData(labelEditFormRef.current));
-        onEditLabel({id, subject, description, backgroundColor})
-            .then(() => cancelEditingLabel(id));
+        saveLabel({id, subject, description, backgroundColor})
+            .then(() => cancelLabel(id));
     };
 
     const onClickCancelEditing = () => {
-        cancelEditingLabel(id);
+        cancelLabel(id);
     };
-
-    const isNew = !id;
-    const submitButton = <button type="submit">{isNew ? 'Create label' : 'Save changes'}</button>;
 
     return (
         <form action="#" ref={labelEditFormRef} onSubmit={onSubmitEditedLabel}>
@@ -53,7 +51,7 @@ export default function LabelEditWrapForm({
             <input type="text" id="backgroundColor" name="backgroundColor" value={backgroundColor} onChange={onChangeBackgroundColor}/>
 
             <button type="button" onClick={onClickCancelEditing}>Cancel</button>
-            {submitButton}
+            <button type="submit">{submitButtonText}</button>
         </form>
     );
 }

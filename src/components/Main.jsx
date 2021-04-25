@@ -9,6 +9,7 @@ import APIs from '../apis/APIs.js';
 export default function Main() {
     const [menu, setMenu] = useState(MENU.LABELS);
     const [labels, setLabels] = useState([]);
+    const [isShowNewLabelForm, setIsShowNewLabelForm] = useState(false);
 
     const fetchLabels = () => {
         APIs.getLabels()
@@ -23,12 +24,18 @@ export default function Main() {
             .then(() => fetchLabels());
     };
 
+    const onCreateLabel = ({subject, description, backgroundColor}) => {
+        return APIs.createLabel({subject, description, backgroundColor})
+            .then(() => fetchLabels());
+    };
+
     const rowWrap = menu === MENU.LABELS
-        ? <LabelsRowWrap labels={labels} onEditLabel={onEditLabel}/>
+        ? <LabelsRowWrap labels={labels} onCreateLabel={onCreateLabel} onEditLabel={onEditLabel} isShowNewLabelForm={isShowNewLabelForm}
+                         setIsShowNewLabelForm={setIsShowNewLabelForm}/>
         : <MilestonesRowWrap/>;
     return (
         <main className="contents">
-            <Gnb menu={menu} onChangeMenu={onChangeMenu}/>
+            <Gnb menu={menu} onChangeMenu={onChangeMenu} setIsShowNewLabelForm={setIsShowNewLabelForm}/>
             {rowWrap}
         </main>
     );

@@ -16,7 +16,8 @@ export default function LabelsRowList({labels, onEditLabel}) {
 
     const labelsRowList = labels.map((label) => {
         if (isEditingLabelIds.includes(label.id)) {
-            return <LabelEditWrap key={label.id} label={label} onEditLabel={onEditLabel} cancelEditingLabel={cancelEditingLabel}/>;
+            return <LabelEditWrap key={label.id} label={label} submitButtonText={'Save Changes'} saveLabel={onEditLabel}
+                                  cancelLabel={cancelEditingLabel}/>;
         }
         return <LabelsRowItem key={label.id} label={label} onEditingLabel={onEditingLabel}/>;
     });
