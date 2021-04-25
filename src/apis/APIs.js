@@ -26,18 +26,11 @@ const defaultAPIs = (method, url, data) => {
 const GET = (url) => defaultAPIs('GET', url);
 const POST = (url, data) => defaultAPIs('POST', url, data);
 const PUT = (url, data) => defaultAPIs('PUT', url, data);
+const DELETE = (url) => defaultAPIs('DELETE', url);
 
 const APIs = {
     getLabels() {
         return GET('/labels');
-    },
-
-    editLabels({id, subject, description, backgroundColor}) {
-        return PUT(`/labels/${id}`, {
-            subject,
-            description,
-            backgroundColor,
-        });
     },
 
     createLabel({subject, description, backgroundColor}) {
@@ -46,6 +39,18 @@ const APIs = {
             description,
             backgroundColor,
         });
+    },
+
+    editLabel({id, subject, description, backgroundColor}) {
+        return PUT(`/labels/${id}`, {
+            subject,
+            description,
+            backgroundColor,
+        });
+    },
+
+    deleteLabel({id}) {
+        return DELETE(`/labels/${id}`);
     },
 }
 

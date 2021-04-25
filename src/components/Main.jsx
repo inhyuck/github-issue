@@ -27,10 +27,18 @@ export default function Main() {
         return APIs.createLabel({subject, description, backgroundColor})
             .then(() => fetchLabels());
     };
+    const deleteLabel = ({id}) => {
+        return APIs.deleteLabel({id})
+            .then(() => fetchLabels());
+    };
 
     const rowWrap = menu === MENU.LABELS
-        ? <LabelsRowWrap labels={labels} createLabel={createLabel} editLabel={editLabel} isShowNewLabelForm={isShowNewLabelForm}
-                         setIsShowNewLabelForm={setIsShowNewLabelForm}/>
+        ? <LabelsRowWrap labels={labels}
+                         isShowNewLabelForm={isShowNewLabelForm}
+                         setIsShowNewLabelForm={setIsShowNewLabelForm}
+                         createLabel={createLabel}
+                         editLabel={editLabel}
+                         deleteLabel={deleteLabel}/>
         : <MilestonesRowWrap/>;
     return (
         <main className="contents">

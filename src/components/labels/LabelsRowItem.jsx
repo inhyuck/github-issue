@@ -1,11 +1,11 @@
-export default function LabelsRowItem({label, onEditingLabel}) {
+export default function LabelsRowItem({label, onEditingLabel, deleteLabel}) {
     const {id, subject, description, backgroundColor} = label;
 
-    const onClickEdit = () => {
+    const onClickEditLabel = () => {
         onEditingLabel(id);
     };
-    const handleClickDelete = () => {
-        console.info('clicked delete button, labelId: ', id);
+    const onClickDeleteLabel = () => {
+        window.confirm('정말 이 레이블을 삭제하시겠습니까?') && deleteLabel({id});
     };
 
     return (
@@ -17,8 +17,8 @@ export default function LabelsRowItem({label, onEditingLabel}) {
                 <span>{description}</span>
             </div>
             <div className="buttons">
-                <button onClick={onClickEdit}>Edit</button>
-                <button onClick={handleClickDelete}>Delete</button>
+                <button onClick={onClickEditLabel}>Edit</button>
+                <button onClick={onClickDeleteLabel}>Delete</button>
             </div>
         </div>
     );

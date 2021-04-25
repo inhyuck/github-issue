@@ -2,7 +2,7 @@ import LabelFormWrap from './LabelFormWrap.jsx';
 import {useState} from 'react';
 import LabelsRowItem from "./LabelsRowItem";
 
-export default function LabelsRowList({labels, editLabel}) {
+export default function LabelsRowList({labels, editLabel, deleteLabel}) {
     const [isEditingLabelIds, setIdEditingLabelIds] = useState([]);
     const onEditingLabel = (newEditingLabelId) => {
         setIdEditingLabelIds((editingLabelIds) => [...editingLabelIds, newEditingLabelId]);
@@ -17,9 +17,9 @@ export default function LabelsRowList({labels, editLabel}) {
     const labelsRowList = labels.map((label) => {
         if (isEditingLabelIds.includes(label.id)) {
             return <LabelFormWrap key={label.id} label={label} submitButtonText={'Save Changes'} saveLabel={editLabel}
-                                  cancelLabel={cancelEditingLabel}/>;
+                                  cancelLabel={cancelEditingLabel} deleteLabel={deleteLabel}/>;
         }
-        return <LabelsRowItem key={label.id} label={label} onEditingLabel={onEditingLabel}/>;
+        return <LabelsRowItem key={label.id} label={label} onEditingLabel={onEditingLabel} deleteLabel={deleteLabel}/>;
     });
 
     return (
