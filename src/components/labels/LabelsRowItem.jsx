@@ -1,8 +1,8 @@
-export default function LabelsRowItem({label}) {
+export default function LabelsRowItem({label, onEditingLabel}) {
     const {id, subject, description, backgroundColor} = label;
 
-    const handleClickEdit = () => {
-        console.info('clicked edit button, labelId: ', id);
+    const onClickEdit = () => {
+        onEditingLabel(id);
     };
     const handleClickDelete = () => {
         console.info('clicked delete button, labelId: ', id);
@@ -17,7 +17,7 @@ export default function LabelsRowItem({label}) {
                 <span>{description}</span>
             </div>
             <div className="buttons">
-                <button onClick={handleClickEdit}>Edit</button>
+                <button onClick={onClickEdit}>Edit</button>
                 <button onClick={handleClickDelete}>Delete</button>
             </div>
         </div>

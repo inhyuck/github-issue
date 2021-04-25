@@ -7,9 +7,29 @@ const GET = (url) => {
         });
 };
 
+const PUT = (url, data) => {
+    return fetch(`${API_END_POINT}${url}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    }).then(response => {
+        return response.json();
+    });
+};
+
 const APIs = {
     getLabels() {
         return GET('/labels');
+    },
+
+    editLabels({id, subject, description, backgroundColor}) {
+        return PUT(`/labels/${id}`, {
+            subject,
+            description,
+            backgroundColor,
+        });
     },
 }
 

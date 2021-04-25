@@ -1,4 +1,5 @@
 import {useRef} from "react";
+import {randomHexColor} from "../utils/colorUtils";
 
 export default function LabelEditWrapForm({
                                               id,
@@ -7,17 +8,33 @@ export default function LabelEditWrapForm({
                                               description,
                                               backgroundColor,
                                               setBackgroundColor,
+                                              onEditLabel,
+                                              cancelEditingLabel,
                                           }) {
 
     const labelEditFormRef = useRef(null);
 
     const onChangeSubject = (event) => {
-        setSubject(event.target.value);
+        setSubject(() => event.target.value);
+    };
+
+    const onClickBackgroundColor = () => {
+        setBackgroundColor(() => randomHexColor());
+    };
+
+    const onChangeBackgroundColor = (event) => {
+        setBackgroundColor(() => event.target.value);
     };
 
     const onSubmitEditedLabel = (event) => {
         event.preventDefault();
-        console.log(Object.fromEntries(new FormData(labelEditFormRef.current)));
+        const {subject, description, backgroundColor} = Object.fromEntries(new FormData(labelEditFormRef.current));
+        onEditLabel({id, subject, description, backgroundColor})
+            .then(() => cancelEditingLabel(id));
+    };
+
+    const onClickCancelEditing = () => {
+        cancelEditingLabel(id);
     };
 
     const isNew = !id;
@@ -26,12 +43,16 @@ export default function LabelEditWrapForm({
     return (
         <form action="#" ref={labelEditFormRef} onSubmit={onSubmitEditedLabel}>
             <label htmlFor="name">Label name</label>
-            <input id="name" name="subject" defaultValue={subject} onChange={onChangeSubject}/>
+            <input type="text" id="name" name="subject" value={subject} onChange={onChangeSubject}/>
 
             <label htmlFor="description">Description</label>
-            <input id="description" name="description" defaultValue={description}/>
+            <input type="text" id="description" name="description" defaultValue={description}/>
 
-            <button>Cancel</button>
+            <button type="button" style={{backgroundColor}} onClick={onClickBackgroundColor}>색상랜덤변경</button>
+            <label htmlFor="backgroundColor">Color</label>
+            <input type="text" id="backgroundColor" name="backgroundColor" value={backgroundColor} onChange={onChangeBackgroundColor}/>
+
+            <button type="button" onClick={onClickCancelEditing}>Cancel</button>
             {submitButton}
         </form>
     );

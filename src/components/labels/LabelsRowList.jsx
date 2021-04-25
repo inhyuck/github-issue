@@ -1,12 +1,24 @@
-import LabelsRowItem from './LabelsRowItem.jsx';
 import LabelEditWrap from './LabelEditWrap.jsx';
+import {useState} from 'react';
+import LabelsRowItem from "./LabelsRowItem";
 
-export default function LabelsRowList({labels}) {
+export default function LabelsRowList({labels, onEditLabel}) {
+    const [isEditingLabelIds, setIdEditingLabelIds] = useState([]);
+    const onEditingLabel = (newEditingLabelId) => {
+        setIdEditingLabelIds((editingLabelIds) => [...editingLabelIds, newEditingLabelId]);
+    };
+    const cancelEditingLabel = (cancelEditingLabelId) => {
+        setIdEditingLabelIds((editingLabelIds) => {
+            const cancelLabelIdIndex = editingLabelIds.findIndex(id => id === cancelEditingLabelId);
+            return [...editingLabelIds.slice(0, cancelLabelIdIndex), ...editingLabelIds.slice(cancelLabelIdIndex + 1)];
+        });
+    };
+
     const labelsRowList = labels.map((label) => {
-        if (label.id === 1) { //todo editing 상태 따로 관리
-            return <LabelEditWrap key={label.id} label={labels[0]}/>;
+        if (isEditingLabelIds.includes(label.id)) {
+            return <LabelEditWrap key={label.id} label={label} onEditLabel={onEditLabel} cancelEditingLabel={cancelEditingLabel}/>;
         }
-        return <LabelsRowItem key={label.id} label={label}/>;
+        return <LabelsRowItem key={label.id} label={label} onEditingLabel={onEditingLabel}/>;
     });
 
     return (

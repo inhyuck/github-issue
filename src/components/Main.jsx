@@ -18,7 +18,14 @@ export default function Main() {
 
     const onChangeMenu = (menu) => setMenu(() => menu);
 
-    const rowWrap = menu === MENU.LABELS ? <LabelsRowWrap labels={labels}/> : <MilestonesRowWrap/>;
+    const onEditLabel = ({id, subject, description, backgroundColor}) => {
+        return APIs.editLabels({id, subject, description, backgroundColor})
+            .then(() => fetchLabels());
+    };
+
+    const rowWrap = menu === MENU.LABELS
+        ? <LabelsRowWrap labels={labels} onEditLabel={onEditLabel}/>
+        : <MilestonesRowWrap/>;
     return (
         <main className="contents">
             <Gnb menu={menu} onChangeMenu={onChangeMenu}/>
