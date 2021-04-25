@@ -1,17 +1,17 @@
 import {useRef} from "react";
 import {randomHexColor} from "../utils/colorUtils";
 
-export default function LabelEditWrapForm({
-                                              id,
-                                              subject,
-                                              setSubject,
-                                              description,
-                                              backgroundColor,
-                                              setBackgroundColor,
-                                              saveLabel,
-                                              cancelLabel,
-                                              submitButtonText,
-                                          }) {
+export default function LabelForm({
+                                      id,
+                                      subject,
+                                      setSubject,
+                                      description,
+                                      backgroundColor,
+                                      setBackgroundColor,
+                                      saveLabel,
+                                      cancelLabel,
+                                      submitButtonText,
+                                  }) {
 
     const labelEditFormRef = useRef(null);
 

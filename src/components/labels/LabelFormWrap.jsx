@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import LabelEditWrapForm from "./LabelEditWrapForm.jsx";
+import LabelForm from "./LabelForm.jsx";
 import {randomHexColor} from "../utils/colorUtils";
 
-export default function LabelEditWrap({label = {}, submitButtonText, saveLabel, cancelLabel}) {
+export default function LabelFormWrap({label = {}, submitButtonText, saveLabel, cancelLabel}) {
     const {
         id,
         subject: prevSubject = '',
@@ -20,13 +20,13 @@ export default function LabelEditWrap({label = {}, submitButtonText, saveLabel, 
             </div>
             <button>Delete</button>
 
-            <LabelEditWrapForm id={id}
-                               subject={subject} setSubject={setSubject}
-                               description={prevDescription}
-                               backgroundColor={backgroundColor} setBackgroundColor={setBackgroundColor}
-                               saveLabel={saveLabel}
-                               cancelLabel={cancelLabel}
-                               submitButtonText={submitButtonText}
+            <LabelForm id={id}
+                       subject={subject} setSubject={setSubject}
+                       description={prevDescription}
+                       backgroundColor={backgroundColor} setBackgroundColor={setBackgroundColor}
+                       saveLabel={saveLabel}
+                       cancelLabel={cancelLabel}
+                       submitButtonText={submitButtonText}
             />
         </div>
     );
