@@ -2,7 +2,7 @@ import LabelsRowHead from './LabelsRowHead.jsx';
 import LabelsRowList from './LabelsRowList.jsx';
 import LabelFormWrap from "./LabelFormWrap";
 
-export default function LabelsRowWrap({labels, isShowNewLabelForm, setIsShowNewLabelForm, onCreateLabel, onEditLabel}) {
+export default function LabelsRowWrap({labels, isShowNewLabelForm, setIsShowNewLabelForm, createLabel, editLabel}) {
     const labelsCount = labels.length;
     const hideNewLabelForm = () => {
         setIsShowNewLabelForm(() => false);
@@ -12,10 +12,10 @@ export default function LabelsRowWrap({labels, isShowNewLabelForm, setIsShowNewL
         <section className="row-wrap">
             {
                 isShowNewLabelForm &&
-                <LabelFormWrap submitButtonText={'Create label'} saveLabel={onCreateLabel} cancelLabel={hideNewLabelForm}/>
+                <LabelFormWrap submitButtonText={'Create label'} saveLabel={createLabel} cancelLabel={hideNewLabelForm}/>
             }
             <LabelsRowHead labelsCount={labelsCount}/>
-            <LabelsRowList labels={labels} onEditLabel={onEditLabel}/>
+            <LabelsRowList labels={labels} editLabel={editLabel}/>
         </section>
     );
 }

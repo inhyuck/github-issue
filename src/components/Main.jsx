@@ -19,18 +19,17 @@ export default function Main() {
 
     const onChangeMenu = (menu) => setMenu(() => menu);
 
-    const onEditLabel = ({id, subject, description, backgroundColor}) => {
-        return APIs.editLabels({id, subject, description, backgroundColor})
+    const editLabel = ({id, subject, description, backgroundColor}) => {
+        return APIs.editLabel({id, subject, description, backgroundColor})
             .then(() => fetchLabels());
     };
-
-    const onCreateLabel = ({subject, description, backgroundColor}) => {
+    const createLabel = ({subject, description, backgroundColor}) => {
         return APIs.createLabel({subject, description, backgroundColor})
             .then(() => fetchLabels());
     };
 
     const rowWrap = menu === MENU.LABELS
-        ? <LabelsRowWrap labels={labels} onCreateLabel={onCreateLabel} onEditLabel={onEditLabel} isShowNewLabelForm={isShowNewLabelForm}
+        ? <LabelsRowWrap labels={labels} createLabel={createLabel} editLabel={editLabel} isShowNewLabelForm={isShowNewLabelForm}
                          setIsShowNewLabelForm={setIsShowNewLabelForm}/>
         : <MilestonesRowWrap/>;
     return (
