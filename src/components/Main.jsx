@@ -9,6 +9,7 @@ import APIs from '../apis/APIs.js';
 export default function Main() {
     const [menu, setMenu] = useState(MENU.LABELS);
     const [labels, setLabels] = useState([]);
+    const [isShowNewLabelForm, setIsShowNewLabelForm] = useState(false);
 
     const fetchLabels = () => {
         APIs.getLabels()
@@ -18,10 +19,30 @@ export default function Main() {
 
     const onChangeMenu = (menu) => setMenu(() => menu);
 
-    const rowWrap = menu === MENU.LABELS ? <LabelsRowWrap labels={labels}/> : <MilestonesRowWrap/>;
+    const editLabel = ({id, subject, description, backgroundColor}) => {
+        return APIs.editLabel({id, subject, description, backgroundColor})
+            .then(() => fetchLabels());
+    };
+    const createLabel = ({subject, description, backgroundColor}) => {
+        return APIs.createLabel({subject, description, backgroundColor})
+            .then(() => fetchLabels());
+    };
+    const deleteLabel = ({id}) => {
+        return APIs.deleteLabel({id})
+            .then(() => fetchLabels());
+    };
+
+    const rowWrap = menu === MENU.LABELS
+        ? <LabelsRowWrap labels={labels}
+                         isShowNewLabelForm={isShowNewLabelForm}
+                         setIsShowNewLabelForm={setIsShowNewLabelForm}
+                         createLabel={createLabel}
+                         editLabel={editLabel}
+                         deleteLabel={deleteLabel}/>
+        : <MilestonesRowWrap/>;
     return (
         <main className="contents">
-            <Gnb menu={menu} onChangeMenu={onChangeMenu}/>
+            <Gnb menu={menu} onChangeMenu={onChangeMenu} setIsShowNewLabelForm={setIsShowNewLabelForm}/>
             {rowWrap}
         </main>
     );

@@ -1,12 +1,25 @@
-import LabelsRowItem from './LabelsRowItem.jsx';
-import LabelEditWrap from './LabelEditWrap.jsx';
+import LabelFormWrap from './LabelFormWrap.jsx';
+import {useState} from 'react';
+import LabelsRowItem from "./LabelsRowItem";
 
-export default function LabelsRowList({labels}) {
+export default function LabelsRowList({labels, editLabel, deleteLabel}) {
+    const [editingLabelIds, setEditingLabelIds] = useState([]);
+    const onEditLabel = (newEditLabelId) => {
+        setEditingLabelIds((editingLabelIds) => [...editingLabelIds, newEditLabelId]);
+    };
+    const cancelEditLabel = (cancelEditLabelId) => {
+        setEditingLabelIds((editingLabelIds) => {
+            const cancelLabelIdIndex = editingLabelIds.findIndex(id => id === cancelEditLabelId);
+            return [...editingLabelIds.slice(0, cancelLabelIdIndex), ...editingLabelIds.slice(cancelLabelIdIndex + 1)];
+        });
+    };
+
     const labelsRowList = labels.map((label) => {
-        if (label.id === 1) { //todo editing 상태 따로 관리
-            return <LabelEditWrap key={label.id} label={labels[0]}/>;
+        if (editingLabelIds.includes(label.id)) {
+            return <LabelFormWrap key={label.id} label={label} submitButtonText={'Save Changes'}
+                                  saveLabel={editLabel} cancelLabel={cancelEditLabel} deleteLabel={deleteLabel}/>;
         }
-        return <LabelsRowItem key={label.id} label={label}/>;
+        return <LabelsRowItem key={label.id} label={label} onEditLabel={onEditLabel} deleteLabel={deleteLabel}/>;
     });
 
     return (
