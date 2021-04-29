@@ -1,4 +1,3 @@
-import {useRef} from "react";
 import {randomHexColor} from "../utils/colorUtils";
 
 export default function LabelForm({
@@ -12,8 +11,6 @@ export default function LabelForm({
                                       cancelLabel,
                                       submitButtonText,
                                   }) {
-
-    const labelEditFormRef = useRef(null);
 
     const onChangeSubject = (event) => {
         setSubject(() => event.target.value);
@@ -29,7 +26,7 @@ export default function LabelForm({
 
     const onSubmitEditedLabel = (event) => {
         event.preventDefault();
-        const {subject, description, backgroundColor} = Object.fromEntries(new FormData(labelEditFormRef.current));
+        const {subject, description, backgroundColor} = Object.fromEntries(new FormData(event.target));
         saveLabel({id, subject, description, backgroundColor})
             .then(() => cancelLabel(id));
     };
@@ -39,7 +36,7 @@ export default function LabelForm({
     };
 
     return (
-        <form action="#" ref={labelEditFormRef} onSubmit={onSubmitEditedLabel}>
+        <form action="#" onSubmit={onSubmitEditedLabel}>
             <label htmlFor="name">Label name</label>
             <input type="text" id="name" name="subject" value={subject} onChange={onChangeSubject}/>
 
