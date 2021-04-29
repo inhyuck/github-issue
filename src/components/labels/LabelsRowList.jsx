@@ -9,8 +9,7 @@ export default function LabelsRowList({labels, editLabel, deleteLabel}) {
     };
     const cancelEditLabel = (cancelEditLabelId) => {
         setEditingLabelIds((editingLabelIds) => {
-            const cancelLabelIdIndex = editingLabelIds.findIndex(id => id === cancelEditLabelId);
-            return [...editingLabelIds.slice(0, cancelLabelIdIndex), ...editingLabelIds.slice(cancelLabelIdIndex + 1)];
+            return editingLabelIds.filter(id => id !== cancelEditLabelId);
         });
     };
 
